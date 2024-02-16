@@ -1,12 +1,12 @@
 package circus;
 
-import circus.animal.Animal;
-import circus.animal.Duck;
-import circus.animal.Parrot;
-import circus.animal.Tiger;
+import circus.animal.*;
 import circus.stuff.Cannon;
 import circus.stuff.Equipment;
 import circus.stuff.Ladder;
+
+import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Circus {
     private static Animal[] animals = {
@@ -41,8 +41,44 @@ public class Circus {
     }
 
     public static void main(String[] args) {
-        makeAnimalsTalk();
-        System.out.println("Total value of animals " + calculateAssetValue(animals));
-        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
+        printNumberOfAnimals();
+//        animals[3] = new Duck("Ching Chong");
+//        printNumberOfAnimals();
+//        makeAnimalsTalk();
+        ArrayList<Animal> animalArrayList = new ArrayList<>(Arrays.asList(animals));
+
+        printAllAnimals(animalArrayList);
+        System.out.println("Number of animals in Circus: " + animalArrayList.size());
+
+        animalArrayList.add(new Duck("Ching Chong"));
+
+        Elephant strongOne = new Elephant("weakest one");
+        Parrot andy = new Parrot("lau");
+
+        printAllAnimals(animalArrayList);
+        printNumberOfAnimals();
+
+        animalArrayList.add(strongOne);
+        animalArrayList.add(andy);
+
+        printAllAnimals(animalArrayList);
+
+        System.out.println("After sorting...");
+        animalArrayList.sort(Animal.AnimalNameComparator);
+        printAllAnimals(animalArrayList);
+
+        System.out.println("Weakest one is at the position: " + animalArrayList.indexOf(strongOne));
+//        System.out.println("Total value of animals " + calculateAssetValue(animals));
+//        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
+    }
+
+    private static void printNumberOfAnimals() {
+        System.out.println("Number of animals in Circus: " + animals.length);
+    }
+
+    private static void printAllAnimals(ArrayList<Animal> animalArrayList) {
+        for(Animal a : animalArrayList) {
+            System.out.println(a);
+        }
     }
 }
